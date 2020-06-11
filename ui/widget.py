@@ -1,8 +1,9 @@
 from typing import Dict,Any,List
 from ..event import Event,EventEngine
-from PyQt5.QtWidgets import QTableWidget,QTableWidgetItem,QMenu,QAction
+from PyQt5.QtWidgets import QTableWidget,QTableWidgetItem,QMenu,QAction,QHeaderView,QFileDialog
 from PyQt5.QtCore import Qt,pyqtSignal
 from PyQt5.QtGui import QContextMenuEvent,QCursor
+import csv
 
 class BaseCell(QTableWidgetItem):
     def __init__(self,content,data):
@@ -18,6 +19,7 @@ class BaseCell(QTableWidgetItem):
         return self.data
 
 
+
 class BasicMonitor(QTableWidget):
     event_type : str = ""
     data_key : str = ""
@@ -27,7 +29,7 @@ class BasicMonitor(QTableWidget):
 
     def __init__(self,event_engine:EventEngine):
         super().__init__()
-        self.event_engine :EventEngine = EventEngine
+        self.event_engine :EventEngine = event_engine
         self.cells : Dict[str,dict] = {}
         self.initUI()
         self.register_event()
@@ -105,9 +107,45 @@ class BasicMonitor(QTableWidget):
             cell.set_content(content,data)
 
     def resize_action(self):
-        pass
+        self.horizontalHeader().resizeSections(QHeaderView.ResizeToContents)
+
     def save_csv(self):
-        pass
+        path, _ = QFileDialog.getSaveFileName(
+            self,'保存数据','','CSV(*.csv)')
+        if not path:
+            return
+
+        with open(path,'w') as f:
+            writer = csv.writer(f,lineterminator = '\n')
+            writer.writerrow(self.headers.keys())
+
+            for row in range(self.rowCount()):
+                row_data = []
+                for column in range(self.columnCount()):
+                    item = self.item(row,column)
+                    if item:
+                        row_data.append(str(item.text()))
+                    else:
+                        row_data.append("")
+
+                writer.writerrow(row_data)
+
+
+
     def contextMenuEvent(self, event: QContextMenuEvent) -> None:
 
         self.menu.popup(QCursor.pos())
+
+
+class Main_Monitor(BasicMonitor):
+    event_type = EVENT_NUM
+    data_key = 'symbol'
+    sorting = True
+    headers = {
+        "class_": {"display": "班级", "cell": BaseCell, "update": False},
+        "name": {"display": "姓名", "cell": BaseCell, "update": False},
+        "sex": {"display": "性别", "cell": BaseCell, "update": False},
+        "age": {"display": "年龄", "cell": BaseCell, "update": False},
+        "salary": {"display": "工资", "cell": BaseCell, "update": True},
+        "time": {"display": "时间", "cell": BaseCell, "update": True}
+    }
