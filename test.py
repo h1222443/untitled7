@@ -1,24 +1,12 @@
-from enum import Enum
-
-class Exchange(Enum):
-    """
-    Exchange.
-    """
-    # Chinese
-    CFFEX = "CFFEX"         # China Financial Futures Exchange
-    SHFE = "SHFE"           # Shanghai Futures Exchange
-    CZCE = "CZCE"           # Zhengzhou Commodity Exchange
-    DCE = "DCE"             # Dalian Commodity Exchange
-    INE = "INE"             # Shanghai International Energy Exchange
-    SSE = "SSE"             # Shanghai Stock Exchange
-    SZSE = "SZSE"           # Shenzhen Stock Exchange
-    SGE = "SGE"             # Shanghai Gold Exchange
-    WXE = "WXE"             # Wuxi Steel Exchange
-
-print(Exchange.CFFEX.value)
+from typing import Dict,List
+from collections import defaultdict
 
 
-class a:
-    ceff = 'hao'
+_handlers: defaultdict = defaultdict(list)
+hand:Dict[str,List] = {}
 
-print(a.ceff)
+
+_handlers['hao'].append(99)
+_handlers['hao'].append("87")
+print(_handlers)
+print(_handlers['hao'])

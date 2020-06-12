@@ -1,5 +1,5 @@
 from typing import Dict,Any,List
-from ..event import Event,EventEngine
+from event import *
 from PyQt5.QtWidgets import QTableWidget,QTableWidgetItem,QMenu,QAction,QHeaderView,QFileDialog
 from PyQt5.QtCore import Qt,pyqtSignal
 from PyQt5.QtGui import QContextMenuEvent,QCursor
@@ -25,7 +25,7 @@ class BasicMonitor(QTableWidget):
     data_key : str = ""
     sorting : bool = False
     headers : Dict[str,dict] = {}
-    signal : pyqtSignal(Event)
+    signal : pyqtSignal = pyqtSignal(Event)
 
     def __init__(self,event_engine:EventEngine):
         super().__init__()
@@ -52,7 +52,7 @@ class BasicMonitor(QTableWidget):
     def init_menu(self):
         self.menu = QMenu(self)
         resize_action = QAction('调整列宽',self)
-        resize_action.triggered.connect(self.resize_columns)
+
         self.menu.addAction(resize_action)
 
         save_action = QAction('保存数据',self)
@@ -61,10 +61,12 @@ class BasicMonitor(QTableWidget):
 
     def register_event(self):
         if self.event_type:
+            print(self.event_type)
             self.signal.connect(self.process_event)
             self.event_engine.register(self.event_type,self.signal.emit)
 
     def process_event(self,event):
+
         if self.sorting:
             self.setSortingEnabled(False)
         data = event.data
@@ -138,7 +140,7 @@ class BasicMonitor(QTableWidget):
 
 
 class Main_Monitor(BasicMonitor):
-    event_type = EVENT_NUM
+    event_type = EVENT_TICK
     data_key = 'symbol'
     sorting = True
     headers = {

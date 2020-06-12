@@ -1,0 +1,36 @@
+from typing import Dict,Any
+from PyQt5.QtWidgets import QMainWindow,QWidget,QTableWidget,QDockWidget,QApplication
+from PyQt5.QtCore import Qt
+from event import EventEngine
+from ui.widget import Main_Monitor
+import sys
+
+class Main_Window(QMainWindow):
+    def __init__(self,event_engine:EventEngine):
+        super().__init__()
+        self.setWindowTitle("test")
+        self.event_engine = event_engine
+        self.init_()
+
+    def init_(self):
+        self.init_dock()
+
+    def init_dock(self):
+        widget,area = self.create_dock(Main_Monitor,"自定义表格",Qt.LeftDockWidgetArea)
+        widget2,area2 = self.create_dock(Main_Monitor,"自定义表格",Qt.RightDockWidgetArea)
+
+    def init_enum(self):
+        pass
+
+    def create_dock(self,widget_class:QWidget,name:str,area:int):
+        widget = widget_class(self.event_engine)
+        dock = QDockWidget(name)
+        dock.setWidget(widget)
+        dock.setObjectName(name)
+        self.addDockWidget(area,dock)
+        return widget,dock
+
+app = QApplication([])
+test = Main_Window(EventEngine())
+test.showMaximized()
+sys.exit(app.exec_())
