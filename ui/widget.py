@@ -61,7 +61,6 @@ class BasicMonitor(QTableWidget):
 
     def register_event(self):
         if self.event_type:
-            print(self.event_type)
             self.signal.connect(self.process_event)
             self.event_engine.register(self.event_type,self.signal.emit)
 

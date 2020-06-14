@@ -75,5 +75,10 @@ class EventEngine:
         if handler not in handler_list:
             handler_list.append(handler)
 
+    def exit(self):
+        self.active = False
+        self.thread_product.join()
+        self.thread_consumer.join()
+
 
 

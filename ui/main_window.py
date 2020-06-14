@@ -1,6 +1,7 @@
 from typing import Dict,Any
-from PyQt5.QtWidgets import QMainWindow,QWidget,QTableWidget,QDockWidget,QApplication
+from PyQt5.QtWidgets import QMainWindow,QWidget,QTableWidget,QDockWidget,QApplication,QMessageBox
 from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QCloseEvent
 from event import EventEngine
 from ui.widget import Main_Monitor
 import sys
@@ -21,6 +22,8 @@ class Main_Window(QMainWindow):
 
     def init_enum(self):
         pass
+    def hao(self):
+        pass
 
     def create_dock(self,widget_class:QWidget,name:str,area:int):
         widget = widget_class(self.event_engine)
@@ -29,6 +32,17 @@ class Main_Window(QMainWindow):
         dock.setObjectName(name)
         self.addDockWidget(area,dock)
         return widget,dock
+
+    def closeEvent(self, a0: QCloseEvent) -> None:
+        reply = QMessageBox.question(self,'退出',"确认退出？",
+                                     QMessageBox.Yes | QMessageBox.No,
+                                     QMessageBox.No)
+        if reply == QMessageBox.Yes:
+            self.event_engine.exit()
+            a0.accept()
+        else:
+            a0.ignore()
+
 
 app = QApplication([])
 test = Main_Window(EventEngine())
