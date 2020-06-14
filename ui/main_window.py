@@ -22,8 +22,6 @@ class Main_Window(QMainWindow):
 
     def init_enum(self):
         pass
-    def hao(self):
-        pass
 
 
     def create_dock(self,widget_class:QWidget,name:str,area:int):
