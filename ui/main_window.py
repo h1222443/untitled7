@@ -24,7 +24,7 @@ class Main_Window(QMainWindow):
         pass
 
 
-    def create_dock(self,widget_class:QWidget,name:str,area:int):
+    def create_dock(self,widget_class:QWidget,name:str,area:int):dsaf
         widget = widget_class(self.event_engine)
         dock = QDockWidget(name)
         dock.setWidget(widget)
