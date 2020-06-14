@@ -24,6 +24,8 @@ class Main_Window(QMainWindow):
         pass
     def hao(self):
         pass
+    def haoo(self):
+        pass
 
     def create_dock(self,widget_class:QWidget,name:str,area:int):
         widget = widget_class(self.event_engine)
