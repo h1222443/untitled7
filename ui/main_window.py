@@ -18,14 +18,11 @@ class Main_Window(QMainWindow):
 
     def init_dock(self):
         widget,area = self.create_dock(Main_Monitor,"自定义表格",Qt.LeftDockWidgetArea)
-        widget2,area2 = self.create_dock(Main_Monitor,"自定义表格",Qt.RightDockWidgetArea)
+        widget2,area2 = self.create_dock(Main_Monitor,"自定义表格",Qt.RightDockWidgetArea)df
 
     def init_enum(self):
         pass
-    def hao(self):
-        pass
-    def haoo(self):
-        pass
+
 
     def create_dock(self,widget_class:QWidget,name:str,area:int):
         widget = widget_class(self.event_engine)
