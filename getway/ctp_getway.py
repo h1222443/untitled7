@@ -41,7 +41,7 @@ from api.vnctp import (
     THOST_FTDC_VC_CV,
     THOST_FTDC_AF_Delete
 )
-from ..constant import (
+from constant import (
     Direction,
     Offset,
     Exchange,
@@ -50,8 +50,8 @@ from ..constant import (
     Status,
     OptionType
 )
-from ..gateway import BaseGateway
-from ..object import (
+from gateway import BaseGateway
+from object import (
     TickData,
     OrderData,
     TradeData,
@@ -62,8 +62,8 @@ from ..object import (
     CancelRequest,
     SubscribeRequest,
 )
-from ..utility import get_folder_path
-from ..event import EVENT_TIMER
+from utility import get_folder_path
+from event import EVENT_TIMER
 
 
 STATUS_CTP2VT = {
@@ -608,7 +608,7 @@ class CtpTdApi(TdApi):
         """
         Callback of instrument query.
         """
-        print(last)
+
         product = PRODUCT_CTP2VT.get(data["ProductClass"], None)
         if product:
 
