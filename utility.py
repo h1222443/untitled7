@@ -13,8 +13,8 @@ from math import floor, ceil
 import numpy as np
 import talib
 
-from .object import BarData, TickData
-from .constant import Exchange, Interval
+from object import BarData, TickData
+from constant import Exchange, Interval
 
 
 log_formatter = logging.Formatter('[%(asctime)s] %(message)s')

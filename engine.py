@@ -12,9 +12,9 @@ from queue import Empty, Queue
 from threading import Thread
 from typing import Any, Sequence, Type, Dict, List, Optional
 
-from vnpy.event import Event, EventEngine
-from .app import BaseApp
-from .event import (
+from event import Event, EventEngine
+from app import BaseApp
+from event import (
     EVENT_TICK,
     EVENT_ORDER,
     EVENT_TRADE,
@@ -23,8 +23,8 @@ from .event import (
     EVENT_CONTRACT,
     EVENT_LOG
 )
-from .gateway import BaseGateway
-from .object import (
+from gateway import BaseGateway
+from object import (
     CancelRequest,
     LogData,
     OrderRequest,
@@ -39,8 +39,8 @@ from .object import (
     ContractData,
     Exchange
 )
-from .setting import SETTINGS
-from .utility import get_folder_path, TRADER_DIR
+from setting import SETTINGS
+from utility import get_folder_path, TRADER_DIR
 NN = 0
 
 class MainEngine:

@@ -6,8 +6,8 @@ from abc import ABC, abstractmethod
 from typing import Any, Sequence, Dict, List, Optional, Callable
 from copy import copy
 
-from vnpy.event import Event, EventEngine
-from .event import (
+from event import Event, EventEngine
+from event import (
     EVENT_TICK,
     EVENT_ORDER,
     EVENT_TRADE,
@@ -16,7 +16,7 @@ from .event import (
     EVENT_CONTRACT,
     EVENT_LOG,
 )
-from .object import (
+from object import (
     TickData,
     OrderData,
     TradeData,

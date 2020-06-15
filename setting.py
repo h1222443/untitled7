@@ -6,7 +6,7 @@ from logging import CRITICAL,INFO,DEBUG
 from typing import Dict, Any
 from tzlocal import get_localzone
 
-from .utility import load_json
+from utility import load_json
 
 SETTINGS: Dict[str, Any] = {
     "font.family": "Arial",
